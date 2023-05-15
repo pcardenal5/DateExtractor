@@ -33,7 +33,7 @@ class ExtractDate:
         batch = tokenizer([text], return_tensors="pt")
 
         generated_ids = model.generate(**batch)
-        print(tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0])
+        tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
         translated_text=tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
         return translated_text
     def StartExtraction(self):
@@ -42,6 +42,7 @@ class ExtractDate:
         answer_spanish=self.Translate(src="en",trg="es",text=self.answer_english)
         data={
             "text":self.text,
+            "answer_english":self.answer_english,
             "answer_spanish":answer_spanish
         }
         return data
