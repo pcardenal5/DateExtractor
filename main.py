@@ -1,0 +1,7 @@
+from transformers import AutoTokenizer, MarianMTModel, RobertaForQuestionAnswering
+import torch
+from ExtractDateService import *
+
+text="Descubrimiento de América es la denominación que recibe el acontecimiento histórico acaecido el 12 de octubre de 1492, consistente en la llegada a América de una expedición proveniente de Castilla, en la península ibérica, dirigida por Cristóbal Colón por mandato de los Reyes Católicos, Isabel de Castilla y Fernando de Aragón. Colón había partido del Puerto de Palos dos meses y nueve días antes y, tras cruzar el océano Atlántico, llegó a una isla del continente americano, Guanahani, creyendo que había llegado a la India. Este hecho es uno de los momentos fundamentales de la historia universal y representa un «descubrimiento» para las personas que vivían en Afroeurasia de culturas, civilizaciones, escrituras, idiomas, tecnologías, productos, cultivos, ganados, ciudades, riquezas, fauna y flora, buena tierra, condiciones climáticas favorables al europeo y no europeo, y de una población con una cosmología de relaciones de poder muy distintas; así como el llamado «encuentro de dos mundos» que habían evolucionado independientemente desde el poblamiento de América."
+DateExtract=ExtractDate(text=text)
+print(DateExtract.StartExtraction())

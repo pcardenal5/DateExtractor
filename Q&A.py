@@ -12,8 +12,8 @@ def AnswerQuestions(question:str, text:str):
     answer_end_index = outputs.end_logits.argmax()
 
     predict_answer_tokens = inputs.input_ids[0, answer_start_index : answer_end_index + 1]
-    tokenizer.decode(predict_answer_tokens, skip_special_tokens=True)
-
+    answer=tokenizer.decode(predict_answer_tokens, skip_special_tokens=True)
+    return answer
 
 # # target 
 # target_start_index = torch.tensor([14])
