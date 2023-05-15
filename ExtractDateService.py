@@ -1,12 +1,13 @@
 from transformers import AutoTokenizer, MarianMTModel, RobertaForQuestionAnswering
 import torch
 class ExtractDate:
-        # init method or constructor
-    def __init__(self, text:str,translated_text=None,answer_english=None, answer_spanish=None):
-        self.text = text,
-        self.translated_text=translated_text if translated_text else "",
-        self.answer_english=answer_english if answer_english else "",
-        self.answer_spanish=answer_spanish if answer_spanish else ""
+    # init method or constructor
+    def __init__(self, text:str, translated_text=None, answer_english=None, answer_spanish=None):
+        self.text = text
+        self.translated_text = translated_text if translated_text else ""
+        self.answer_english = answer_english if answer_english else ""
+        self.answer_spanish = answer_spanish if answer_spanish else ""
+
 
     def AnswerQuestions(self, text):
         tokenizer = AutoTokenizer.from_pretrained("deepset/roberta-base-squad2")
@@ -37,7 +38,7 @@ class ExtractDate:
         return translated_text
     def StartExtraction(self):
         text_trans=self.Translate(src="es",trg="en",text=self.text)
-        self=self.AnswerQuestions(text_trans)
+        self.AnswerQuestions(text_trans)
         answer_spanish=self.Translate(src="en",trg="es",text=self.answer_english)
         data={
             "text":self.text,
