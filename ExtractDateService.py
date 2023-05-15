@@ -12,7 +12,7 @@ class ExtractDate:
     def AnswerQuestions(self, text):
         tokenizer = AutoTokenizer.from_pretrained("deepset/roberta-base-squad2")
         model = RobertaForQuestionAnswering.from_pretrained("deepset/roberta-base-squad2")
-        question="What is the date?"
+        question="What is the date of the event?"
         inputs = tokenizer(question, text, return_tensors="pt")
         with torch.no_grad():
             outputs = model(**inputs)
