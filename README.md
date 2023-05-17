@@ -45,11 +45,11 @@ The translator has been chosen from various models, the most popular model is th
 - Strengths: There are libraries such as datefinder that are execute to extract dates but cannot perform as well as this Extraction Service, moreover python libraries are not suitable for multiple languages such as spanish making the translator an essential part of te project.
 These are some of the results for the short texts:
 Helsinki Model:
-[./img/HelsinkiModel.png]
+![Helsinki Testig](./img/HelsinkiModel.png)
 TD5-large(not built for translatingo from spanish to english):
-[./img/td5Large.png]
+![TD5-large Testig](./img/td5Large.png)
 Facebook model 
-[./img/Facebook.png]
+![Facebook Testig](./img/Facebook.png)
 
 The Helsinki model is clearly better than the [https://huggingface.co/facebook/nllb-200-distilled-600M] model
 
@@ -65,5 +65,5 @@ The second model we used as transformer in hugging face is the second most downl
     exact_match = 86.91
 '''
 Using the best translator which one is the best model? As we can observe in the following picture, the supponsingly best model cannot answer some of the questions and others are not the correct answer, therefore we concluded that it is best to use the Robert-base-squad2
-[./img/q&a.png]
+![Q&A Testig](./img/q&a.png)
 
