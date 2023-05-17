@@ -2,8 +2,8 @@
 from ExtractDateService import *
 
 ### Functions ###
-def extract_date(text):
-    DateExtract=ExtractDate(text=text)
+def extract_date(text, model):
+    DateExtract=ExtractDate(text=text,choose_model=model)
     print(DateExtract.StartExtraction(), '\n')
 
 
@@ -32,5 +32,7 @@ if __name__ == '__main__':
 
     for key, value in texts.items():
         print(f'### {key} TEXTS ###', '\n')
-        for text in value:
-            extract_date(text)
+        for i in [0,1,2]:# Models to try 
+            print(f'### Model {i} ###')
+            for text in value:
+                extract_date(text, i)
