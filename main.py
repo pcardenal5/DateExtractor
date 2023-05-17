@@ -1,6 +1,4 @@
 ### Import necessary libraries ###
-from transformers import AutoTokenizer, MarianMTModel, RobertaForQuestionAnswering
-import torch
 from ExtractDateService import *
 
 ### Functions ###
@@ -10,7 +8,7 @@ def extract_date(text):
 
 
 ### Main ###
-if '__main__' == __name__:
+if __name__ == '__main__':
 
     short_texts = ['Nos vemos el próximo martes, 21/05/23, para discutir los detalles del proyecto.',
                    'El concierto de tu banda favorita será el 10 de junio de este año. ¡No te lo puedes perder!',
