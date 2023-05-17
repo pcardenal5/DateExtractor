@@ -43,13 +43,13 @@ The translator has been chosen from various models, the most popular model is th
 - Flaws: there are some phrases that cannot be extracte as a date, for example the phrase "this year" cannot be interpreted or the phrase next month or next week. Moreover, extracting dates that
         have the year or the month too apart from themselves is also an impossible task, this tends to happen when in comes to years as day amd month are closely related, the year when written in leters at a distance of two words cannot be exracted, in order to do so, a second queston must be asked as to what is the year of the event, in this case it must be checked if the year is indeed in the original question and if not it must be added.
 - Strengths: There are libraries such as datefinder that are execute to extract dates but cannot perform as well as this Extraction Service, moreover python libraries are not suitable for multiple languages such as spanish making the translator an essential part of te project.
-These are some of the results for the short texts:
-Helsinki Model:
+These are some of the results for the short texts:  
+Helsinki Model:  
 ![Helsinki Testig](./img/HelsinkiModel.png)
-TD5-large(not built for translatingo from spanish to english):
-![TD5-large Testig](./img/td5Large.png)
-Facebook model 
-![Facebook Testig](./img/Facebook.png)
+TD5-large(not built for translatingo from spanish to english):  
+![TD5-large Testig](./img/Td5Large.png)  
+Facebook model   
+![Facebook Testig](./img/Facebook.png)  
 
 The Helsinki model is clearly better than the [https://huggingface.co/facebook/nllb-200-distilled-600M] model
 
