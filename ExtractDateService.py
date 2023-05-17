@@ -1,28 +1,43 @@
-from transformers import AutoTokenizer, MarianMTModel, RobertaForQuestionAnswering,T5Tokenizer, T5ForConditionalGeneration,M2M100ForConditionalGeneration, M2M100Tokenizer
+from transformers import AutoTokenizer, MarianMTModel, RobertaForQuestionAnswering,T5Tokenizer, T5ForConditionalGeneration,M2M100ForConditionalGeneration, M2M100Tokenizer, BertForQuestionAnswering
 import torch
 class ExtractDate:
     # init method or constructor
-    def __init__(self, text:str, translated_text=None, answer_english=None, answer_spanish=None, choose_model=None):
+    def __init__(self, text:str, translated_text=None, answer_english=None, answer_spanish=None, choose_model=None, question_model=None):
         self.text = text
         self.translated_text = translated_text if translated_text else ""
         self.answer_english = answer_english if answer_english else ""
         self.answer_spanish = answer_spanish if answer_spanish else ""
         self.choose_model = choose_model if choose_model else 0
+        self.question_model = question_model if question_model else 0
 
 
     def AnswerQuestions(self, text):
-        tokenizer = AutoTokenizer.from_pretrained("deepset/roberta-base-squad2")
-        model = RobertaForQuestionAnswering.from_pretrained("deepset/roberta-base-squad2")
-        question="What is the date of the event?"
-        inputs = tokenizer(question, text, return_tensors="pt")
-        with torch.no_grad():
-            outputs = model(**inputs)
+        if self.question_model==1:
+            tokenizer = AutoTokenizer.from_pretrained("deepset/bert-base-cased-squad2")
+            model = BertForQuestionAnswering.from_pretrained("deepset/bert-base-cased-squad2")
+            question="What is the date of the event?"
+            inputs = tokenizer(question, text, return_tensors="pt")
+            with torch.no_grad():
+                outputs = model(**inputs)
 
-        answer_start_index = outputs.start_logits.argmax()
-        answer_end_index = outputs.end_logits.argmax()
+            answer_start_index = outputs.start_logits.argmax()
+            answer_end_index = outputs.end_logits.argmax()
 
-        predict_answer_tokens = inputs.input_ids[0, answer_start_index : answer_end_index + 1]
-        self.answer_english=tokenizer.decode(predict_answer_tokens, skip_special_tokens=True)
+            predict_answer_tokens = inputs.input_ids[0, answer_start_index : answer_end_index + 1]
+            self.answer_english=tokenizer.decode(predict_answer_tokens, skip_special_tokens=True)
+        else:
+            tokenizer = AutoTokenizer.from_pretrained("deepset/roberta-base-squad2")
+            model = RobertaForQuestionAnswering.from_pretrained("deepset/roberta-base-squad2")
+            question="What is the date of the event?"
+            inputs = tokenizer(question, text, return_tensors="pt")
+            with torch.no_grad():
+                outputs = model(**inputs)
+
+            answer_start_index = outputs.start_logits.argmax()
+            answer_end_index = outputs.end_logits.argmax()
+
+            predict_answer_tokens = inputs.input_ids[0, answer_start_index : answer_end_index + 1]
+            self.answer_english=tokenizer.decode(predict_answer_tokens, skip_special_tokens=True)
         return self
     
     def Translate(self, src:str,trg:str, text:str):
@@ -44,8 +59,10 @@ class ExtractDate:
         
             tokenizer = T5Tokenizer.from_pretrained("t5-large")
             model = T5ForConditionalGeneration.from_pretrained("t5-large")
-
-            task_prefix = "translate "+src+" to "+ trg+": "
+            if src=="Spanish":
+                task_prefix = "traduce Español a Inglés: "
+            else:
+                task_prefix = "translate English to Spanish: "
             # use different length sentences to test batching
 
             inputs = tokenizer([task_prefix + text], return_tensors="pt", padding=True,max_length=256, truncation=True)
