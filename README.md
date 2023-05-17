@@ -18,8 +18,9 @@ To add to the carrying list of problems, there is no general structure to these 
 
 ## Models used
 
-The simplest method of extracting dates we would use are Regular Expresions, RegEx. They are the cornerstone of many text processing problems and we would like to make the most of them. However, due to the high amount of ways the date can appear the RegEx may become too complex to even be useful. On top of that, given the high variance of the ways a date can be written and the need to understand the context surrounding it we have decided to skip this process. This would be an example if we knew the pattern and the formate the date has.
-'''
+The simplest method of extracting dates we would use are Regular Expresions, RegEx. They are the cornerstone of many text processing problems and we would like to make the most of them. However, due to the high amount of ways the date can appear the RegEx may become too complex to even be useful. On top of that, given the high variance of the ways a date can be written and the need to understand the context surrounding it we have decided to skip this process. This would be an example if we knew the pattern and the formate the date has.  
+
+```
     import re
     # open a text file
     f = open("apple2.txt", 'r')
@@ -32,7 +33,7 @@ The simplest method of extracting dates we would use are Regular Expresions, Reg
     for date in dates:
         print(date)
     f.close()
-''' 
+``` 
 
 Once the RegEx have been taken to their limit we have decided to explore the available resources on Hugging Face. They provide a plethora of transformers that could help us parse the text. On top of that, given the power of those models we may be able to get even more information out of the documents. However, we may be at a disadvantage. These transformers have been made in English so we will have to use a convoluted set of transformers to even start using them. 
 
@@ -45,25 +46,31 @@ The translator has been chosen from various models, the most popular model is th
 - Strengths: There are libraries such as datefinder that are execute to extract dates but cannot perform as well as this Extraction Service, moreover python libraries are not suitable for multiple languages such as spanish making the translator an essential part of te project.
 These are some of the results for the short texts:  
 Helsinki Model:  
-![Helsinki Testig](./img/HelsinkiModel.png)
+![Helsinki Testig](./img/HelsinkiModel.png)  
+
 TD5-large(not built for translatingo from spanish to english):  
 ![TD5-large Testig](./img/Td5Large.png)  
+
 Facebook model   
 ![Facebook Testig](./img/Facebook.png)  
 
 The Helsinki model is clearly better than the [https://huggingface.co/facebook/nllb-200-distilled-600M] model
 
 ### Question Answeing Transformer
-To avoid developing a new and fresh set of data where dates in every format and every possible date of every combination are labeled as an entity to execute an entity recognition network we chose to use hugginface trnasformers again, this time based on the results of the huggin face community  [https://huggingface.co/deepset/roberta-base-squad2] the roberta-base-squad2 is the most downloaded and most liked model of all dispite having relatively low performance:
-'''
+To avoid developing a new and fresh set of data where dates in every format and every possible date of every combination are labeled as an entity to execute an entity recognition network we chose to use hugginface trnasformers again, this time based on the results of the huggin face community  [https://huggingface.co/deepset/roberta-base-squad2] the roberta-base-squad2 is the most downloaded and most liked model of all dispite having relatively low performance:  
+
+```
     "exact": 79.87029394424324,
     "f1": 82.91251169582613,
-''' 
-The second model we used as transformer in hugging face is the second most downloaded one [https://huggingface.co/docs/transformers/main/en/model_doc/bert#transformers.BertForQuestionAnswering].This model is based on Bert and it is really powerfull. Their performance is way better:
-'''
+```   
+
+The second model we used as transformer in hugging face is the second most downloaded one [https://huggingface.co/docs/transformers/main/en/model_doc/bert#transformers.BertForQuestionAnswering].This model is based on Bert and it is really powerfull. Their performance is way better:  
+
+```
     f1 = 93.15
     exact_match = 86.91
-'''
+```  
+
 Using the best translator which one is the best model? As we can observe in the following picture, the supponsingly best model cannot answer some of the questions and others are not the correct answer, therefore we concluded that it is best to use the Robert-base-squad2
 ![Q&A Testig](./img/q&a.png)
 
