@@ -72,6 +72,7 @@ The second model we used as transformer in hugging face is the second most downl
     exact_match = 86.91
 ```  
 
-Using the best translator which one is the best model? As we can observe in the following picture model o being Roberta and model1 being Bert, the supponsingly best model cannot answer some of the questions and others are not the correct answer, therefore we concluded that it is best to use the Robert-base-squad2
+Using the best translator which one is the best model? As we can observe in the following picture model o being Roberta and model1 being Bert, the supponsingly best model cannot answer some of the questions and others are not the correct answer, therefore we concluded that it is best to use the Robert-base-squad2  
+
 ![Q&A Testig](./img/q&a.png)
 
